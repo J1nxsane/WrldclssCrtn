@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Class Curtain - Registration Successful</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="logoo.png" type="image/png" />
+    <style>
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        body {
+            margin-top: 4rem; /* Adjust if nav height changes */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif']
+                    },
+                    colors: {
+                        'primary': '#1a1b4b',
+                        'secondary': '#e6f3ff'
+                    }
+                }
+            }
+        }
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body class="font-poppins">
+
+    <nav class="bg-white py-4 px-6 md:px-12 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center text-2xl font-playfair font-bold text-primary">
+                <img src="logoo.png" alt="Logo" class="h-10 mr-2"> World Class Curtain
+            </a>
+            <div class="md:hidden">
+                <img src="menuuu.png" alt="Menu" class="menu-btn cursor-pointer" onclick="toggleMenu()" />
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-primary">HOME</a>
+                <a href="seemore.html" class="hover:text-primary">MORE</a>
+                <a href="index.html#about" class="hover:text-primary">ABOUT</a>
+                <a href="contact.html" class="hover:text-primary">CONTACT</a>
+                <a href="developers.html" class="hover:text-primary">DEVELOPERS</a>
+                <a href="Research.html" class="hover:text-primary">RESEARCH</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-6">
+            <a href="index.html" class="block hover:text-primary">HOME</a>
+            <a href="seemore.html" class="block hover:text-primary">MORE</a>
+            <a href="index.html#about" class="block hover:text-primary">ABOUT</a>
+            <a href="contact.html" class="block hover:text-primary">CONTACT</a>
+            <a href="developers.html" class="block hover:text-primary">DEVELOPERS</a>
+            <a href="Research.html" class="block hover:text-primary">RESEARCH</a>
+        </div>
+    </nav>
+
+    <section class="py-24 bg-secondary">
+        <div class="container mx-auto px-6 md:px-12 flex justify-center">
+            <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg text-center">
+                <i class="fas fa-envelope-circle-check text-6xl text-green-500 mb-6"></i>
+                <h2 class="text-3xl font-playfair font-bold text-primary mb-4">Registration Successful!</h2>
+                <p class="text-gray-600 mb-8">
+                    Thank you for signing up. We've sent a verification link to your email address. Please check your inbox and click the link to activate your account.
+                </p>
+                <a href="index.html" class="bg-primary text-white px-8 py-3 rounded-md hover:bg-opacity-90 transition-colors duration-300 font-semibold">
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white py-12 text-center">
+        <p>&copy; 2025 World Class Curtain. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

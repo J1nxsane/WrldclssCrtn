@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - World Class Curtain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="logoo.png" type="image/png">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7fafc;
+        }
+        .container {
+            max-width: 960px;
+            margin: auto;
+            padding: 2rem;
+        }
+    </style>
+
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+        const SUPABASE_URL = 'https://xnztzxxpstbgulzscxrb.supabase.co'
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuenR6eHhwc3RiZ3VsenNjeHJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc2NzIwMDEsImV4cCI6MjA3MzI0ODAwMX0.NI2IwUrB8Rc_vM_fTZDu0rB1Re2xgWS5NsqBVq2DOVg'
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+        window.supabase = supabase
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a1b4b',
+                        'secondary': '#e6f3ff',
+                    }
+                }
+            }
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body class="font-poppins">
+
+    <nav class="bg-white py-4 px-6 md:px-12 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center text-2xl font-playfair font-bold text-primary">
+                <img src="logoo.png" alt="World Class Curtain Logo" class="h-10 mr-2">
+                World Class Curtain
+            </a>
+            <div class="md:hidden">
+                <img src="menuuu.png" alt="Menu Button" class="menu-btn cursor-pointer" id="menu-btn" onclick="toggleMenu()">
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-primary">HOME</a>
+                <a href="seemore.html" class="hover:text-primary">MORE</a>
+                <a href="#about" class="hover:text-primary">ABOUT</a>
+                <a href="contact.html" class="hover:text-primary">CONTACT</a>
+                <a href="developers.html" class="hover:text-primary">DEVELOPERS</a>
+                <a href="Research.html" class="hover:text-primary">RESEARCH</a>
+                <a href="cart.html" class="hover:text-primary"><i class="fas fa-shopping-cart"></i> CART</a>
+                <a href="profile.html" class="hover:text-primary"><i class="fas fa-user"></i> PROFILE</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-6">
+            <a href="index.html" class="block hover:text-primary">HOME</a>
+            <a href="seemore.html" class="block hover:text-primary">MORE</a>
+            <a href="#about" class="block hover:text-primary">ABOUT</a>
+            <a href="contact.html" class="block hover:text-primary">CONTACT</a>
+            <a href="developers.html" class="block hover:text-primary">DEVELOPERS</a>
+            <a href="Research.html" class="block hover:text-primary">RESEARCH</a>
+            <a href="cart.html" class="block hover:text-primary"><i class="fas fa-shopping-cart"></i> CART</a>
+            <a href="profile.html" class="block hover:text-primary"><i class="fas fa-user"></i> PROFILE</a>
+        </div>
+    </nav>
+
+    <div class="container py-12">
+        <h1 class="text-3xl font-playfair font-bold text-center text-primary mb-8">Your Shopping Cart</h1>
+        <div id="cart-items" class="flex flex-col gap-4">
+            </div>
+        <div id="cart-summary" class="bg-white p-6 rounded-lg shadow-xl mt-8 hidden">
+            <h2 class="text-xl font-playfair font-bold text-primary mb-4">Order Summary</h2>
+            <div class="flex justify-between items-center mb-2">
+                <span>Subtotal:</span>
+                <span id="subtotal" class="font-bold">₱0</span>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+                <span>Shipping:</span>
+                <span class="font-bold">₱150</span>
+            </div>
+            <hr class="border-gray-300 mb-4">
+            <div class="flex justify-between items-center text-xl font-bold">
+                <span>Total:</span>
+                <span id="total-price">₱150</span>
+            </div>
+            <button id="checkout-btn" class="w-full bg-primary text-white py-3 rounded-md hover:bg-opacity-90 transition-colors duration-300 font-semibold mt-6">
+                Proceed to Checkout
+            </button>
+        </div>
+        <p id="empty-cart-message" class="text-center text-gray-500 mt-8">Your cart is empty. Add some items to get started!</p>
+    </div>
+
+    <footer class="bg-primary text-white py-12 text-center mt-auto">
+        <p>&copy; 2025 World Class Curtain. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        const supabase = window.supabase;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartSummary = document.getElementById('cart-summary');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total-price');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            function renderCart() {
+                cartItemsContainer.innerHTML = '';
+                if (cart.length === 0) {
+                    document.getElementById('empty-cart-message').classList.remove('hidden');
+                    cartSummary.classList.add('hidden');
+                    return;
+                }
+                document.getElementById('empty-cart-message').classList.add('hidden');
+                cartSummary.classList.remove('hidden');
+
+                let subtotal = 0;
+
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item flex items-center justify-between p-4 bg-white rounded-lg shadow-sm';
+                    itemElement.innerHTML = `
+                        <div class="flex items-center space-x-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-md">
+                            <div>
+                                <h3 class="font-medium">${item.name}</h3>
+                                <p class="text-gray-600">₱${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <input type="number" value="${item.quantity}" min="1" class="w-16 text-center border rounded quantity-input" data-id="${item.id}">
+                            <button class="text-red-500 hover:text-red-700 remove-btn" data-id="${item.id}">Remove</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                    subtotal += item.price * item.quantity;
+                });
+
+                subtotalEl.textContent = `₱${subtotal.toFixed(2)}`;
+                totalEl.textContent = `₱${(subtotal + 150).toFixed(2)}`;
+
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', (event) => {
+                        const id = event.target.dataset.id;
+                        const newQuantity = parseInt(event.target.value);
+                        if (newQuantity < 1) return;
+                        
+                        const item = cart.find(item => item.id === id);
+                        if (item) {
+                            item.quantity = newQuantity;
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            renderCart();
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const id = event.target.dataset.id;
+                        cart = cart.filter(item => item.id !== id);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        renderCart();
+                    });
+                });
+            }
+
+            checkoutBtn.addEventListener('click', async () => {
+                const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+                
+                if (sessionError || !session) {
+                    alert('You must be signed in to place an order.');
+                    window.location.href = 'profile.html';
+                    return;
+                }
+
+                if (cart.length === 0) {
+                    alert('Your cart is empty.');
+                    return;
+                }
+
+                const totalAmount = parseFloat(totalEl.textContent.replace('₱', ''));
+
+                const { data, error } = await supabase
+                    .from('orders')
+                    .insert([
+                        { user_id: session.user.id, items: cart, total_amount: totalAmount, status: 'Pending' }
+                    ])
+                    .select();
+
+                if (error) {
+                    console.error('Error placing order:', error);
+                    alert('An error occurred while placing your order. Please try again.');
+                } else {
+                    alert('Order placed successfully! You can track your order status on your profile page.');
+                    localStorage.removeItem('cart');
+                    window.location.href = 'profile.html';
+                }
+            });
+
+            renderCart();
+        });
+    </script>
+</body>
+</html>

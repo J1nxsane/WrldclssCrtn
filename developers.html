@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Class Curtain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="logoo.png" type="image/png">
+    
+    <style>
+        /* Hero Section Styles */
+        .hero {
+            position: sticky;
+            overflow: hidden;
+            transition: background-image 1s ease-in-out; /* Smooth transition for background change */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+            z-index: 1;
+        }
+
+        .hero h2, .hero p, .hero button {
+            z-index: 2; /* Ensure text and button are above the overlay */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add shadow for better readability */
+        }
+
+        .hero button {
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+        }
+
+        .hero button:hover {
+            background-color: rgba(26, 27, 75, 0.8); /* Darker background on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+        }
+
+        /* Fixed Navigation Styles */
+        nav {
+            position: sticky; /* Fix the navigation bar */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            right: 0; /* Align to the right */
+            z-index: 10; /* Ensure it stays above other content */
+        }
+
+        body {
+            margin-top: 4rem; /* Adjust this value based on the height of your nav */
+        }
+
+        .text-small {
+            font-size: 10px; /* Adjust the size as needed */
+        }
+
+        /* Animation Styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a1b4b',
+                        'secondary': '#e6f3ff',
+                    }
+                }
+            }
+        }
+
+        // JavaScript to toggle mobile menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scroll to sections
+        function smoothScroll(target) {
+            const element = document.querySelector(target);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Carousel functionality for hero section
+        const images = [
+            'bigi1.jpg',
+            'bigi2.jpg',
+            'bigi3.jpg' // Add more images as needed
+        ];
+        let currentIndex = 0;
+
+        function changeBackground() {
+            const heroSection = document.querySelector('.hero');
+            currentIndex = (currentIndex + 1) % images.length; // Loop through images
+            heroSection.style.backgroundImage = `url('${images[currentIndex]}')`;
+        }
+
+        // Change background every 5 seconds
+        setInterval(changeBackground, 5000);
+
+        // Function to handle scroll animations
+        function handleScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+
+                if (elementTop < windowHeight - 50) { // Adjust the threshold as needed
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Initial call to handleScroll to show elements that are already in view
+        handleScroll();
+    </script>
+</head>
+<body class="font-poppins">
+    <!-- Navigation -->
+    <nav class="bg-white py-4 px-6 md:px-12 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center text-2xl font-playfair font-bold text-primary">
+                <img src="logoo.png" alt="World Class Curtain Logo" class="h-10 mr-2"> <!-- Adjust the height as needed -->
+                World Class Curtain
+            </a>
+            <div class="md:hidden">
+                <img src="menuuu.png" alt="Menu Button" class="menu-btn cursor-pointer" id="menu-btn" onclick="toggleMenu()">
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-primary">HOME</a>
+                <a href="seemore.html" class="hover:text-primary">MORE</a>
+                <a href="index.html" class="hover:text-primary">ABOUT</a>
+                <a href="contact.html" class="hover:text-primary">CONTACT</a>
+                <a href="developers.html" class="hover:text-primary">DEVELOPERS</a>
+                <a href="Research.html" class="hover:text-primary">RESEARCH</a>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-6">
+            <a href="index.html" class="block hover:text-primary">HOME</a>
+            <a href="seemore.html" class="block hover:text-primary">MORE</a>
+            <a href="index.html" class="block hover:text-primary">ABOUT</a>
+            <a href="contact.html" class="block hover:text-primary">CONTACT</a>
+            <a href="developers.html" class="hover:text-primary">DEVELOPERS</a>
+            <a href="Research.html" class="hover:text-primary">RESEARCH</a>
+        </div>
+    </nav>
+
+    <section class="hero bg-secondary py-16 md:py-24 bg-cover bg-center" style="background-image: url('bigi1.jpg');">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-2xl relative z-10">
+                <h2 class="text-4xl md:text-5xl font-playfair font-bold text-yellow-500 mb-4">Curtains That<br/>Reflect your Style</h2>
+                <p class="text-yellow-500 mb-8">Explore The Elegance of World - Class<br/>Curtains, where Luxury Meets<br/>Functionality.</p>
+                <button class="bg-primary text-white px-8 py-3 rounded hover:bg-opacity-90 transition" onclick="window.location.href='seemore.html'">
+                    Explore Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 fade-in">
+        <div class="container mx-auto px-6 md:px-12">
+            <h2 class="text-3xl font-playfair text-primary text-center mb-8">In Partial Fulfillment of the Requirements in CS329 - Software engineering 2nd semester, School Year 2024-2025 ASIAN INSTITUTE OF COMPUTER STUDIES College of Science, Engineering and Business Commonwealth Avenue, Holy Spirit Quezon city</h2>
+            <h2 class="text-3xl font-playfair font-bold text-primary text-center mb-8">Meet Our Developers</h2>
+            <p class="text-center text-gray-600 mb-12">We are students from Asian Institute of Computer Studies, Commonwealth Branch, Section BS6AA, Subject CSE322 (Software Engineering) under Supervision of Dr. Manuel Luis Delos Santos</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6"> <!-- Adjusted gap -->
+                <!-- Developer 0-->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 mx-auto">
+                    <img src="docawee.jpg" class="img-fluid" alt="Villalva, Jhon Micco S.">
+                    <h3 class="font-medium mb-2">Dr. Delos Santos, Manuel Luis C.</h3>
+                    <p class="text-gray-600 mb-2">College Dean</p>
+                    <p class="text-gray-600 mb-2">Research Director</p>
+                    <p class="text-gray-600 mb -2">CS329 - Software Engineering Professor</p>
+                    <span class="text-primary text-small">manuelluisconchadelossantos@gmail.com</span>
+                </div>
+               
+                <!-- Developer 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 mx-auto">
+                    <img src="mics.jpg" class="img-fluid" alt="Villalva, Jhon Micco S.">
+                    <h3 class="font-medium mb-2">Villalva, Jhon Micco S.</h3>
+                    <p class="text-gray-600 mb-2">Leader/Researcher</p>
+                    <span class="text-primary text-small">jonhmiccov@gmail.com</span>
+                </div>
+
+                <!-- Developer 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 mx-auto">
+                    <img src="cess2.jpg" class="img-fluid" alt="Escanan, Princess T.">
+                    <h3 class="font-medium mb-2">Escanan, Princess T.</h3>
+                    <p class="text-gray-600 mb-2">Researcher</p>
+                    <span class="text-primary text-small">princess.escanan@gmail.com</span>
+                </div>
+               
+                <!-- Developer 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 mx-auto">
+                    <img src="thia.jpg" class="img-fluid" alt="Juagpao, Althia Rose M.">
+                    <h3 class="font-medium mb-2">Juagpao, Althia Rose M.</h3>
+                    <p class="text-gray-600 mb-2">Researcher</p>
+                    <span class="text-primary text-small">althiarosejuagpao@gmail.com</span>
+                </div>
+
+                <!-- Developer 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 mx-auto">
+                    <img src="meee1.jpg" class="img-fluid" alt="Tamayo, Jomari R.">
+                    <h3 class="font-medium mb-2">Tamayo, Jomari R.</h3>
+                    <p class="text-gray-600 mb-2">Software Developer</p>
+                    <span class="text-primary text-small">tamayojomarii01@gmail.com</span>
+                </div>
+
+                <!-- Developer 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 mx-auto">
+                    <img src="luzz.jpg" class="img-fluid" alt="Tarasona, Ma. Luz G.">
+                    <h3 class="font-medium mb-2">Tarasona, Ma. Luz G.</h3>
+                    <p class="text-gray-600 mb-2">Researcher</p>
+                    <span class="text-primary text-small">zulairamtarasona10@gmail.com</span>
+                </div>
+
+                <!-- Developer 6 --> 
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 mx-auto">
+                    <img src="kern.jpg" class="img-fluid" alt="Olangco, Kern Dominic">
+                    <h3 class="font-medium mb-2">Olangco, Kern Dominic</h3>
+                    <p class="text-gray-600 mb-2">Researcher</p>
+                    <span class="text-primary text-small">kdolangco2001@gmail.com</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

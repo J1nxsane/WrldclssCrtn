@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Class Curtain - Your Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="logoo.png" type="image/png" />
+    <style>
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        body {
+            margin-top: 4rem;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif']
+                    },
+                    colors: {
+                        'primary': '#1a1b4b',
+                        'secondary': '#e6f3ff'
+                    }
+                }
+            }
+        }
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body class="font-poppins bg-secondary">
+
+    <nav class="bg-white py-4 px-6 md:px-12 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center text-2xl font-playfair font-bold text-primary">
+                <img src="logoo.png" alt="Logo" class="h-10 mr-2"> World Class Curtain
+            </a>
+            <div class="md:hidden">
+                <img src="menuuu.png" alt="Menu" class="menu-btn cursor-pointer" onclick="toggleMenu()" />
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-primary">HOME</a>
+                <a href="seemore.html" class="hover:text-primary">MORE</a>
+                <a href="index.html#about" class="hover:text-primary">ABOUT</a>
+                <a href="contact.html" class="hover:text-primary">CONTACT</a>
+                <a href="developers.html" class="hover:text-primary">DEVELOPERS</a>
+                <a href="Research.html" class="hover:text-primary">RESEARCH</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-6">
+            <a href="index.html" class="block hover:text-primary">HOME</a>
+            <a href="seemore.html" class="block hover:text-primary">MORE</a>
+            <a href="index.html#about" class="block hover:text-primary">ABOUT</a>
+            <a href="contact.html" class="block hover:text-primary">CONTACT</a>
+            <a href="developers.html" class="block hover:text-primary">DEVELOPERS</a>
+            <a href="Research.html" class="block hover:text-primary">RESEARCH</a>
+        </div>
+    </nav>
+
+    <main class="py-16">
+        <div class="container mx-auto px-6 md:px-12 flex justify-center">
+            <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
+                <h2 class="text-3xl font-playfair font-bold text-primary text-center mb-8">Manage Your Profile</h2>
+                
+                <form id="profile-form" class="mb-10">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Your Details</h3>
+                    <div class="mb-4">
+                        <label for="profile-email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                        <input type="email" id="profile-email" class="w-full p-3 bg-gray-100 border border-gray-300 rounded-md" readonly />
+                        <p class="text-sm text-gray-500 mt-1">Email addresses cannot be changed.</p>
+                    </div>
+                    <div class="mb-6">
+                        <label for="profile-name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                        <input type="text" id="profile-name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required />
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-md hover:bg-opacity-90 transition-colors duration-300 font-semibold">
+                        Update Profile
+                    </button>
+                </form>
+
+                <form id="password-form">
+                     <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Change Password</h3>
+                     <div class="mb-6">
+                        <label for="new-password" class="block text-gray-700 font-medium mb-2">New Password</label>
+                        <input type="password" id="new-password" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary" placeholder="••••••••" required />
+                    </div>
+                    <button type="submit" class="w-full bg-gray-700 text-white py-3 rounded-md hover:bg-gray-800 transition-colors duration-300 font-semibold">
+                        Update Password
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white py-12 text-center">
+        <p>&copy; 2025 World Class Curtain. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+        const SUPABASE_URL = 'https://xyvqvcfdkvvbagqxygwo.supabase.co'
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5dnF2Y2Zka3Z2YmFncXh5Z3dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NTAzMjUsImV4cCI6MjA3MzMyNjMyNX0.y9mp2CwTpmBfeu03iQx_2khV2F3SD_xhFTih3WMoMMA'
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+        const profileForm = document.getElementById('profile-form');
+        const passwordForm = document.getElementById('password-form');
+        const nameInput = document.getElementById('profile-name');
+        const emailInput = document.getElementById('profile-email');
+        
+        let currentUser = null;
+
+        // 1. Check user session and fetch profile data
+        async function loadUserData() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                // If no user is logged in, redirect to the homepage
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            currentUser = session.user;
+            emailInput.value = currentUser.email;
+
+            // Fetch the full name from the 'profiles' table
+            const { data: profile, error } = await supabase
+                .from('profiles')
+                .select('full_name')
+                .eq('id', currentUser.id)
+                .single();
+
+            if (error) {
+                console.error('Error fetching profile:', error);
+                alert('Could not load your profile data.');
+            } else if (profile) {
+                nameInput.value = profile.full_name;
+            }
+        }
+
+        // 2. Handle profile name update
+        profileForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const newName = nameInput.value.trim();
+
+            if (!newName) {
+                alert('Name cannot be empty.');
+                return;
+            }
+
+            const { error } = await supabase
+                .from('profiles')
+                .update({ full_name: newName })
+                .eq('id', currentUser.id);
+
+            if (error) {
+                alert('Failed to update profile: ' + error.message);
+            } else {
+                alert('Profile updated successfully!');
+            }
+        });
+
+        // 3. Handle password update
+        passwordForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const newPassword = document.getElementById('new-password').value;
+
+            if (newPassword.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                return;
+            }
+
+            const { error } = await supabase.auth.updateUser({
+                password: newPassword
+            });
+
+            if (error) {
+                alert('Failed to update password: ' + error.message);
+            } else {
+                alert('Password updated successfully!');
+                passwordForm.reset();
+            }
+        });
+
+        // Initial load
+        loadUserData();
+
+    </script>
+</body>
+</html>
